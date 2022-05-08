@@ -1,7 +1,6 @@
 class Pokemon:
 
-    def __init__(self, tipo, especie, level=1, nome=None):
-        self.tipo = tipo
+    def __init__(self, especie, level=1, nome=None):
         self.especie = especie
         self.level = level
 
@@ -16,7 +15,20 @@ class Pokemon:
     def atacar(self, pokemon):
         print('{} atacou {}'.format(self.especie, pokemon.especie))
 
-meu_pokemon = Pokemon('Fogo', 'Charmander')
-pokemon_amigo = Pokemon('Raio', 'Pikachu')
+class PokemonEletrico(Pokemon):
+    tipo = 'Eletrico'
+    def atacar(self, pokemon):
+        print('{} lançou um raio do trovão em {}'.format(self, pokemon))
 
-print(meu_pokemon)
+class PokemonAgua(Pokemon):
+    tipo = 'Agua'
+    def atacar(self, pokemon):
+        print('{} lançou um jato de agua em {}'.format(self, pokemon))
+
+class PokemonFogo(Pokemon):
+    tipo = 'Fogo'
+    def atacar(self, pokemon):
+        print('{} lançou uma bola de fogo em {}'.format(self, pokemon))
+
+pikachu = PokemonEletrico('Pikachu', 50)
+charmander = PokemonFogo('Charmander', 30)
