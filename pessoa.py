@@ -1,11 +1,15 @@
+import random
 from pokemon import *
 
+NOMES = ['Maria','Marcelo','Mauro','Alfredo','Joao','Victor','Guilherme',
+         'Charles','Tatiana','Nick','Joao','Willian']
+
 class Pessoa:
-    def __init__(self, nome, pokemons=[]):
+    def __init__(self, nome=None, pokemons=[]):
         if nome:
             self.nome = nome
         else:
-            self.nome = 'Anonimo'
+            self.nome = random.choice(NOMES)
 
         self.pokemons = pokemons
 
@@ -33,9 +37,5 @@ class Inimigo(Pessoa):
 charmander = PokemonFogo('Fogo', 'Charmander')
 pikachu = PokemonEletrico('Eletrico', 'Pikachu')
 
-eu = Player(nome='Charles', pokemons=[])
-
+eu = Player()
 print(eu.nome)
-eu.mostrar_pokemons()
-eu.capturar_pokemons(charmander)
-eu.mostrar_pokemons()
