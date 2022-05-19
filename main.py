@@ -12,9 +12,11 @@ def escolher_pokemon_inicial(player):
     print('2 - Charmander')
     print('3 - Squirtle')
 
-    escolha = int(input('Digite sua escolha: '))
+
 
     while True:
+        escolha = int(input('Digite sua escolha: '))
+
         if escolha == 1:
             player.capturar_pokemons(pikachu)
             break
@@ -27,7 +29,9 @@ def escolher_pokemon_inicial(player):
         else:
             print('Escolha inválida')
 
-eu = Player()
-escolher_pokemon_inicial(eu)
-eu.mostrar_pokemons()
 
+player = Player('Charles')
+player.capturar_pokemons(PokemonFogo('Charmander', level=40))
+inimigo1 = Inimigo(nome='Mateus', pokemons=[PokemonAgua('Squirtle', level=10)])
+
+player.batalhar(inimigo1)
