@@ -12,8 +12,6 @@ def escolher_pokemon_inicial(player):
     print('2 - Charmander')
     print('3 - Squirtle')
 
-
-
     while True:
         escolha = int(input('Digite sua escolha: '))
 

@@ -37,20 +37,13 @@ class Pessoa:
             print('{} não possui Pokemons'.format(self))
 
     def escolher_pokemon(self):
-        self.mostrar_pokemons()
-
         if self.pokemons:
-            while True:
-                escolha = input('Digite sua escolha: ')
-                try:
-                    escolha = int(escolha)
-                    pokemon_escolhido = self.pokemons[escolha]
-                    print('{} eu escolho você!'.format(pokemon_escolhido))
-                    return pokemon_escolhido
-                except:
-                    print('Escolha invalida')
+            pokemon_escolhido = random.choice(self.pokemons)
+            print('{} escolheu {}'.format(self, pokemon_escolhido))
+            return pokemon_escolhido
         else:
             print('Essse jogador não possui nenhum jogador para ser escolhido')
+
 
     def batalhar(self, pessoa):
         print('{} iniciou uma batalha com {}'.format(self, pessoa))
@@ -67,6 +60,22 @@ class Player(Pessoa):
         self.pokemons.append(pokemon)
         print('{} foi capturado'.format(pokemon))
 
+    def escolher_pokemon(self):
+        self.mostrar_pokemons()
+
+        if self.pokemons:
+            while True:
+                escolha = input('Digite sua escolha: ')
+                try:
+                    escolha = int(escolha)
+                    pokemon_escolhido = self.pokemons[escolha]
+                    print('{} eu escolho você!'.format(pokemon_escolhido))
+                    return pokemon_escolhido
+                except:
+                    print('Escolha invalida')
+        else:
+            print('Essse jogador não possui nenhum jogador para ser escolhido')
+
 class Inimigo(Pessoa):
     tipo = 'Inimigo'
 
@@ -76,10 +85,3 @@ class Inimigo(Pessoa):
                 pokemons.append(random.choice(POKEMONS))
         super().__init__(nome=nome, pokemons=pokemons)
 
-    def escolher_pokemon(self):
-        if self.pokemons:
-            pokemon_escolhido = random.choice(self.pokemons)
-            print('{} escolheu {}'.format(self, pokemon_escolhido))
-            return pokemon_escolhido
-        else:
-            print('Essse jogador não possui nenhum jogador para ser escolhido')
