@@ -30,6 +30,6 @@ def escolher_pokemon_inicial(player):
 
 player = Player('Charles')
 player.capturar_pokemons(PokemonFogo('Charmander', level=40))
-inimigo1 = Inimigo(nome='Mateus', pokemons=[PokemonAgua('Squirtle', level=10)])
+inimigo1 = Inimigo(nome='Mateus', pokemons=[PokemonAgua('Squirtle', level=40)])
 
 player.batalhar(inimigo1)
