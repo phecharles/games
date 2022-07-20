@@ -77,6 +77,20 @@ class Pessoa:
         else:
             print('Essa batalha não pode ocorrer')
 
+
+    def explorar(self):
+        if random.random() <= 0.3:
+            pokemon = random.choice(POKEMONS)
+            print("Um Pokemon selvagem apareceu: {}".format(pokemon))
+
+            escolha = input("Deseja capturar ? s/n: ")
+            if escolha == 's':
+                self.capturar_pokemons(pokemon)
+            else:
+                print("Ah! Que pena")
+        else:
+            print("Você está sem sorte! Tente novamente")
+
 class Player(Pessoa):
     tipo = 'Player'
 
