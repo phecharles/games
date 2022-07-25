@@ -27,7 +27,44 @@ def escolher_pokemon_inicial(player):
         else:
             print('Escolha inválida')
 
+if __name__ == "__main__":
+    print("====================================================")
+    print("Bem-vindo ao Game Pokemon RPG de Terminal")
+    print("====================================================")
 
-player = Player('Charles')
+    nome = input("Olá, qual é o seu nome? ")
+    player = Player(nome)
+    print("{}, esse é um mundo habitado por Pokemons, sua missão é se tornaR um mestre de Pokemons!!".format(nome))
+    player.mostrar_dinheiro()
 
-player.explorar()
+    if player.pokemons:
+        print("Já vi que você tem alguns Pokemons")
+        player.mostrar_pokemons()
+    else:
+        print("[ATENÇÃO]: Você não tem nenhum Pokemon, portanto você precisa escolher um")
+        escolher_pokemon_inicial(player)
+
+    print("Pronto, agora que você possui um Pokemon, enfrente seu Inimigo Gary")
+
+    gary = Inimigo(nome="Gary", pokemons=[PokemonAgua("Squirtle", level=1)])
+    player.batalhar(gary)
+
+    while True:
+        print("====================================================")
+        print("1- Explorar o mundo a fora")
+        print("2- Lutar com um inimigo")
+        print("0 - Sair do jogo")
+        escolha = input("Oque deseja fazer?")
+
+
+        if escolha == "0":
+            print("Fechando o joog")
+            break
+        elif escolha == "1":
+            player.explorar()
+        elif escolha == "2":
+            inimigo_aleatorio = Inimigo()
+            player.batalhar(inimigo_aleatorio)
+        else:
+            print("Escolha inválida")
+
