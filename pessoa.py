@@ -119,7 +119,10 @@ class Inimigo(Pessoa):
 
     def __init__(self, nome=None, pokemons=[]):
         if not pokemons:
+            pokemons_aleatorios=[]
             for pokemon in range(1,6):
-                pokemons.append(random.choice(POKEMONS))
-        super().__init__(nome=nome, pokemons=pokemons)
+                pokemons_aleatorios.append(random.choice(POKEMONS))
+            super().__init__(nome=nome, pokemons=pokemons_aleatorios)
+        else:
+            super().__init__(nome=nome, pokemons=pokemons)
 

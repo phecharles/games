@@ -1,3 +1,4 @@
+import pickle
 from pessoa import *
 from pokemon import *
 
@@ -27,32 +28,55 @@ def escolher_pokemon_inicial(player):
         else:
             print('Escolha inválida')
 
+def salvar_jogo(player):
+    try:
+        with open("database", "wb") as arquivo:
+            pickle.dump(player, arquivo)
+            print("Game salvo com sucesso!")
+    except Exception as error:
+        print("Erro ao salvar")
+        print(error)
+
+def carregar_jogo():
+    try:
+        with open("database", "rb") as arquivo:
+            player = pickle.load(arquivo)
+            return player
+            print("Game carregado com sucesso!")
+    except Exception as error:
+        print("Erro ao carregar o game")
+        print(error)
+
 if __name__ == "__main__":
     print("====================================================")
     print("Bem-vindo ao Game Pokemon RPG de Terminal")
     print("====================================================")
 
-    nome = input("Olá, qual é o seu nome? ")
-    player = Player(nome)
-    print("{}, esse é um mundo habitado por Pokemons, sua missão é se tornaR um mestre de Pokemons!!".format(nome))
-    player.mostrar_dinheiro()
+    player = carregar_jogo()
 
-    if player.pokemons:
-        print("Já vi que você tem alguns Pokemons")
-        player.mostrar_pokemons()
-    else:
-        print("[ATENÇÃO]: Você não tem nenhum Pokemon, portanto você precisa escolher um")
-        escolher_pokemon_inicial(player)
+    if not player:
+        nome = input("Olá, qual é o seu nome? ")
+        player = Player(nome)
+        print("{}, esse é um mundo habitado por Pokemons, sua missão é se tornaR um mestre de Pokemons!!".format(nome))
+        player.mostrar_dinheiro()
 
-    print("Pronto, agora que você possui um Pokemon, enfrente seu Inimigo Gary")
+        if player.pokemons:
+            print("Já vi que você tem alguns Pokemons")
+            player.mostrar_pokemons()
+        else:
+            print("[ATENÇÃO]: Você não tem nenhum Pokemon, portanto você precisa escolher um")
+            escolher_pokemon_inicial(player)
 
-    gary = Inimigo(nome="Gary", pokemons=[PokemonAgua("Squirtle", level=1)])
-    player.batalhar(gary)
+        print("Pronto, agora que você possui um Pokemon, enfrente seu Inimigo Gary")
+        gary = Inimigo(nome="Gary", pokemons=[PokemonAgua("Squirtle", level=1)])
+        player.batalhar(gary)
+        salvar_jogo(player)
 
     while True:
         print("====================================================")
         print("1- Explorar o mundo a fora")
         print("2- Lutar com um inimigo")
+        print("3- Ver Pokeagenda")
         print("0 - Sair do jogo")
         escolha = input("Oque deseja fazer?")
 
@@ -62,9 +86,13 @@ if __name__ == "__main__":
             break
         elif escolha == "1":
             player.explorar()
+            salvar_jogo(player)
         elif escolha == "2":
             inimigo_aleatorio = Inimigo()
             player.batalhar(inimigo_aleatorio)
+            salvar_jogo(player)
+        elif escolha == "3":
+            salvar_jogo(player)
         else:
             print("Escolha inválida")
 
